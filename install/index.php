@@ -189,11 +189,20 @@ function do_install() {
 }
 
 if (!isset($_SESSION['inst_set']))  // default settings
+    $host = getenv("FA_DB_HOST");
+	$port = getenv("FA_DB_PORT");
+	$user = getenv("FA_DB_USER");
+	$pass = getenv("FA_DB_PASSWORD");
+	$name = getenv("FA_DB_NAME");
+	if (len($host) == 0) $host = "localhost";
+	if ($port == "3306") $port = "";
+	if (len($user) == 0) $host = "root";
 	$_SESSION['inst_set'] = array(
-		'host'=>'localhost', 
-		'port' => '', // 3306
-		'dbuser' => 'root',
-		'dbpassword' => '',
+		'host'=>$host, 
+		'port' => $port, // 3306
+		'dbuser' => $user,
+		'dbpassword' => $pass,
+		'dbname' => $name,
 		'username' => 'admin',
 		'tbpref' => '0_',
 		'admin' => 'admin',
