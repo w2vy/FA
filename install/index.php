@@ -195,9 +195,9 @@ if (!isset($_SESSION['inst_set']))  // default settings
 	$pass = getenv("FA_DB_PASSWORD");
 	$name = getenv("FA_DB_NAME");
     $host = getenv("FA_DB_HOST");
-	if (strlen($host) == 0) $host = "localhostx";
+	if (strlen($host) == 0) $host = "localhost";
 	if ($port == "3306") $port = "";
-	if (strlen($user) == 0) $user = "rootx";
+	if (strlen($user) == 0) $user = "root";
 	$_SESSION['inst_set'] = array(
 		'host'=>  $host, 
 		'port' => $port, // 3306
