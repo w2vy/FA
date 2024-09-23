@@ -189,17 +189,18 @@ function do_install() {
 }
 
 if (!isset($_SESSION['inst_set']))  // default settings
-    $host = getenv("FA_DB_HOST");
+    $host = getenv("FA_DB_HOST"); // First time  fails for some reason
 	$port = getenv("FA_DB_PORT");
 	$user = getenv("FA_DB_USER");
 	$pass = getenv("FA_DB_PASSWORD");
 	$name = getenv("FA_DB_NAME");
+    $host = getenv("FA_DB_HOST");	
 	echo "Host $host port $port user $user Passwd $pass Name $name";
 	if (strlen($host) == 0) $host = "localhostx";
 	if ($port == "3306") $port = "";
-	if (strlen($user) == 0) $host = "rootx";
+	if (strlen($user) == 0) $user = "rootx";
 	$_SESSION['inst_set'] = array(
-		'host'=>$host, 
+		'host'=>  $host, 
 		'port' => $port, // 3306
 		'dbuser' => $user,
 		'dbpassword' => $pass,
@@ -362,7 +363,7 @@ start_form();
 			text_row_ex(_("Server Port:"), 'port', 30, 60);
 			text_row_ex(_("Database Name:"), 'dbname', 30);
 			text_row_ex(_("Database User:"), 'dbuser', 30);
-			password_row(_("Database Password:"), 'dbpassword', '');
+			password_row(_("Database Password:"), 'dbpassword', $_POST['dbpassword']);
 			collations_list_row(_("Database Collation:"), 'collation');
 			yesno_list_row(_("Use '0_' Table Prefix:"), 'tbpref', 1, _('Yes'), _('No'), false);
 			check_row(_("Install Additional Language Packs from FA Repository:"), 'sel_langs');
