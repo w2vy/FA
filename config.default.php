@@ -215,18 +215,12 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
    between all instances (syncthing) and a mysql master is active */
 
    if (strlen(getenv("FA_DB_NAME"))) { // We have the right ENV Vars
-	   echo "Have DB_NAME<br>";
 	   mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
 	   try {
-		   echo "Connect DB_NAME<br>";
 		   $db = mysqli_connect(getenv("FA_DB_HOST"), getenv("FA_DB_USER"), getenv("FA_DB_PASSWORD"), "", getenv("FA_DB_PORT"));
-		   echo "Select DB_NAME<br>";
 		   mysqli_select_db($db, getenv("FA_DB_NAME"));
 	   } catch (mysqli_sql_exception $e) {
-		   echo "Exception DB_NAME<br>";
 		   header('Location: /404notFound.php');
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
-	   echo "Done DB_NAME<br>";
    }
-   echo "Exit DB_NAME<br>";
