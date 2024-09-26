@@ -38,7 +38,7 @@ CREATE TABLE `0_attachments` (
   `type_no` int(11) NOT NULL DEFAULT '0',
   `trans_no` int(11) NOT NULL DEFAULT '0',
   `unique_name` varchar(60) NOT NULL DEFAULT '',
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
   `filename` varchar(60) NOT NULL DEFAULT '',
   `filesize` int(11) NOT NULL DEFAULT '0',
   `filetype` varchar(60) NOT NULL DEFAULT '',
@@ -60,7 +60,7 @@ CREATE TABLE `0_audit_trail` (
   `stamp` timestamp NOT NULL,
   `description` varchar(60) DEFAULT NULL,
   `fiscal_year` int(11) NOT NULL DEFAULT '0',
-  `gl_date` date NOT NULL DEFAULT '0000-00-00',
+  `gl_date` date NOT NULL DEFAULT '1000-01-01',
   `gl_seq` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Seq` (`fiscal_year`,`gl_date`,`gl_seq`),
@@ -122,7 +122,7 @@ CREATE TABLE `0_bank_accounts` (
   `dflt_curr_act` tinyint(1) NOT NULL DEFAULT '0',
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `bank_charge_act` varchar(15) NOT NULL DEFAULT '',
-  `last_reconciled_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_reconciled_date` timestamp NOT NULL DEFAULT '1000-01-01 00:00:00',
   `ending_reconcile_balance` double NOT NULL DEFAULT '0',
   `inactive` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -134,8 +134,8 @@ CREATE TABLE `0_bank_accounts` (
 -- Data of table `0_bank_accounts` --
 
 INSERT INTO `0_bank_accounts` VALUES
-('1060', '0', 'Current account', 'N/A', 'N/A', NULL, 'USD', '1', '1', '5690', '0000-00-00 00:00:00', '0', '0'),
-('1065', '3', 'Petty Cash account', 'N/A', 'N/A', NULL, 'USD', '0', '2', '5690', '0000-00-00 00:00:00', '0', '0');
+('1060', '0', 'Current account', 'N/A', 'N/A', NULL, 'USD', '1', '1', '5690', '1000-01-01 00:00:00', '0', '0'),
+('1065', '3', 'Petty Cash account', 'N/A', 'N/A', NULL, 'USD', '0', '2', '5690', '1000-01-01 00:00:00', '0', '0');
 
 -- Structure of table `0_bank_trans` --
 
@@ -147,7 +147,7 @@ CREATE TABLE `0_bank_trans` (
   `trans_no` int(11) DEFAULT NULL,
   `bank_act` varchar(15) NOT NULL DEFAULT '',
   `ref` varchar(40) DEFAULT NULL,
-  `trans_date` date NOT NULL DEFAULT '0000-00-00',
+  `trans_date` date NOT NULL DEFAULT '1000-01-01',
   `amount` double DEFAULT NULL,
   `dimension_id` int(11) NOT NULL DEFAULT '0',
   `dimension2_id` int(11) NOT NULL DEFAULT '0',
@@ -203,7 +203,7 @@ DROP TABLE IF EXISTS `0_budget_trans`;
 
 CREATE TABLE `0_budget_trans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
   `account` varchar(15) NOT NULL DEFAULT '',
   `memo_` tinytext NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
@@ -371,7 +371,7 @@ DROP TABLE IF EXISTS `0_comments`;
 CREATE TABLE `0_comments` (
   `type` int(11) NOT NULL DEFAULT '0',
   `id` int(11) NOT NULL DEFAULT '0',
-  `date_` date DEFAULT '0000-00-00',
+  `date_` date DEFAULT '1000-01-01',
   `memo_` tinytext,
   KEY `type_and_id` (`type`,`id`)
 ) ENGINE=InnoDB ;
@@ -524,7 +524,7 @@ CREATE TABLE `0_cust_allocations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `person_id` int(11) DEFAULT NULL,
   `amt` double unsigned DEFAULT NULL,
-  `date_alloc` date NOT NULL DEFAULT '0000-00-00',
+  `date_alloc` date NOT NULL DEFAULT '1000-01-01',
   `trans_no_from` int(11) DEFAULT NULL,
   `trans_type_from` int(11) DEFAULT NULL,
   `trans_no_to` int(11) DEFAULT NULL,
@@ -588,8 +588,8 @@ CREATE TABLE `0_debtor_trans` (
   `version` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `debtor_no` int(11) unsigned NOT NULL,
   `branch_code` int(11) NOT NULL DEFAULT '-1',
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
-  `due_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
+  `due_date` date NOT NULL DEFAULT '1000-01-01',
   `reference` varchar(60) NOT NULL DEFAULT '',
   `tpe` int(11) NOT NULL DEFAULT '0',
   `order_` int(11) NOT NULL DEFAULT '0',
@@ -620,10 +620,10 @@ INSERT INTO `0_debtor_trans` VALUES
 ('3', '10', '0', '2', '2', '2021-05-07', '2021-06-17', '003/2021', '1', '5', '267.14', '0', '0', '0', '0', '0', '0', '1.123', '1', '1', '0', '1', '1'),
 ('4', '10', '0', '1', '1', '2021-05-07', '2021-05-07', '004/2021', '1', '7', '0', '0', '0', '0', '0', '0', '0', '1', '1', '0', '0', '4', '1'),
 ('5', '10', '0', '1', '1', '2022-01-21', '2022-01-21', '001/2022', '1', '8', '1250', '0', '0', '0', '0', '1250', '0', '1', '1', '0', '0', '4', '1'),
-('1', '12', '0', '1', '1', '2021-05-10', '0000-00-00', '001/2021', '0', '0', '6240', '0', '0', '0', '0', '6240', '0', '1', '0', '0', '0', NULL, '0'),
-('2', '12', '0', '1', '1', '2021-05-07', '0000-00-00', '002/2021', '0', '0', '300', '0', '0', '0', '0', '300', '0', '1', '0', '0', '0', NULL, '0'),
-('3', '12', '0', '1', '1', '2021-05-07', '0000-00-00', '003/2021', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', NULL, '0'),
-('4', '12', '0', '1', '1', '2022-01-21', '0000-00-00', '001/2022', '0', '0', '1250', '0', '0', '0', '0', '1250', '0', '1', '0', '0', '0', NULL, '0'),
+('1', '12', '0', '1', '1', '2021-05-10', '1000-01-01', '001/2021', '0', '0', '6240', '0', '0', '0', '0', '6240', '0', '1', '0', '0', '0', NULL, '0'),
+('2', '12', '0', '1', '1', '2021-05-07', '1000-01-01', '002/2021', '0', '0', '300', '0', '0', '0', '0', '300', '0', '1', '0', '0', '0', NULL, '0'),
+('3', '12', '0', '1', '1', '2021-05-07', '1000-01-01', '003/2021', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', NULL, '0'),
+('4', '12', '0', '1', '1', '2022-01-21', '1000-01-01', '001/2022', '0', '0', '1250', '0', '0', '0', '0', '1250', '0', '1', '0', '0', '0', NULL, '0'),
 ('1', '13', '1', '1', '1', '2021-05-10', '2021-05-05', 'auto', '1', '1', '6240', '0', '0', '0', '0', '0', '0', '1', '1', '0', '0', '4', '1'),
 ('2', '13', '1', '1', '1', '2021-05-07', '2021-05-07', 'auto', '1', '2', '300', '0', '0', '0', '0', '0', '0', '1', '1', '0', '0', '4', '1'),
 ('3', '13', '1', '2', '2', '2021-05-07', '2021-06-17', 'auto', '1', '5', '267.14', '0', '0', '0', '0', '0', '0', '1.123', '1', '1', '0', '1', '1'),
@@ -712,8 +712,8 @@ CREATE TABLE `0_dimensions` (
   `name` varchar(60) NOT NULL DEFAULT '',
   `type_` tinyint(1) NOT NULL DEFAULT '1',
   `closed` tinyint(1) NOT NULL DEFAULT '0',
-  `date_` date NOT NULL DEFAULT '0000-00-00',
-  `due_date` date NOT NULL DEFAULT '0000-00-00',
+  `date_` date NOT NULL DEFAULT '1000-01-01',
+  `due_date` date NOT NULL DEFAULT '1000-01-01',
   PRIMARY KEY (`id`),
   UNIQUE KEY `reference` (`reference`),
   KEY `date_` (`date_`),
@@ -735,7 +735,7 @@ CREATE TABLE `0_exchange_rates` (
   `curr_code` char(3) NOT NULL DEFAULT '',
   `rate_buy` double NOT NULL DEFAULT '0',
   `rate_sell` double NOT NULL DEFAULT '0',
-  `date_` date NOT NULL DEFAULT '0000-00-00',
+  `date_` date NOT NULL DEFAULT '1000-01-01',
   PRIMARY KEY (`id`),
   UNIQUE KEY `curr_code` (`curr_code`,`date_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 ;
@@ -751,8 +751,8 @@ DROP TABLE IF EXISTS `0_fiscal_year`;
 
 CREATE TABLE `0_fiscal_year` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `begin` date DEFAULT '0000-00-00',
-  `end` date DEFAULT '0000-00-00',
+  `begin` date DEFAULT '1000-01-01',
+  `end` date DEFAULT '1000-01-01',
   `closed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `begin` (`begin`),
@@ -773,7 +773,7 @@ CREATE TABLE `0_gl_trans` (
   `counter` int(11) NOT NULL AUTO_INCREMENT,
   `type` smallint(6) NOT NULL DEFAULT '0',
   `type_no` int(11) NOT NULL DEFAULT '0',
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
   `account` varchar(15) NOT NULL DEFAULT '',
   `memo_` tinytext NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
@@ -856,7 +856,7 @@ CREATE TABLE `0_grn_batch` (
   `supplier_id` int(11) NOT NULL DEFAULT '0',
   `purch_order_no` int(11) DEFAULT NULL,
   `reference` varchar(60) NOT NULL DEFAULT '',
-  `delivery_date` date NOT NULL DEFAULT '0000-00-00',
+  `delivery_date` date NOT NULL DEFAULT '1000-01-01',
   `loc_code` varchar(5) DEFAULT NULL,
   `rate` double DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -1001,11 +1001,11 @@ DROP TABLE IF EXISTS `0_journal`;
 CREATE TABLE `0_journal` (
   `type` smallint(6) NOT NULL DEFAULT '0',
   `trans_no` int(11) NOT NULL DEFAULT '0',
-  `tran_date` date DEFAULT '0000-00-00',
+  `tran_date` date DEFAULT '1000-01-01',
   `reference` varchar(60) NOT NULL DEFAULT '',
   `source_ref` varchar(60) NOT NULL DEFAULT '',
-  `event_date` date DEFAULT '0000-00-00',
-  `doc_date` date NOT NULL DEFAULT '0000-00-00',
+  `event_date` date DEFAULT '1000-01-01',
+  `doc_date` date NOT NULL DEFAULT '1000-01-01',
   `currency` char(3) NOT NULL DEFAULT '',
   `amount` double NOT NULL DEFAULT '0',
   `rate` double NOT NULL DEFAULT '1',
@@ -1186,7 +1186,7 @@ CREATE TABLE `0_purch_order_details` (
   `order_no` int(11) NOT NULL DEFAULT '0',
   `item_code` varchar(20) NOT NULL DEFAULT '',
   `description` tinytext,
-  `delivery_date` date NOT NULL DEFAULT '0000-00-00',
+  `delivery_date` date NOT NULL DEFAULT '1000-01-01',
   `qty_invoiced` double NOT NULL DEFAULT '0',
   `unit_price` double NOT NULL DEFAULT '0',
   `act_price` double NOT NULL DEFAULT '0',
@@ -1215,7 +1215,7 @@ CREATE TABLE `0_purch_orders` (
   `order_no` int(11) NOT NULL AUTO_INCREMENT,
   `supplier_id` int(11) NOT NULL DEFAULT '0',
   `comments` tinytext,
-  `ord_date` date NOT NULL DEFAULT '0000-00-00',
+  `ord_date` date NOT NULL DEFAULT '1000-01-01',
   `reference` tinytext NOT NULL,
   `requisition_no` tinytext,
   `into_stock_location` varchar(5) NOT NULL DEFAULT '',
@@ -1297,9 +1297,9 @@ CREATE TABLE `0_recurrent_invoices` (
   `group_no` smallint(6) unsigned DEFAULT NULL,
   `days` int(11) NOT NULL DEFAULT '0',
   `monthly` int(11) NOT NULL DEFAULT '0',
-  `begin` date NOT NULL DEFAULT '0000-00-00',
-  `end` date NOT NULL DEFAULT '0000-00-00',
-  `last_sent` date NOT NULL DEFAULT '0000-00-00',
+  `begin` date NOT NULL DEFAULT '1000-01-01',
+  `end` date NOT NULL DEFAULT '1000-01-01',
+  `last_sent` date NOT NULL DEFAULT '1000-01-01',
   PRIMARY KEY (`id`),
   UNIQUE KEY `description` (`description`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 ;
@@ -1437,7 +1437,7 @@ CREATE TABLE `0_sales_orders` (
   `reference` varchar(100) NOT NULL DEFAULT '',
   `customer_ref` tinytext NOT NULL,
   `comments` tinytext,
-  `ord_date` date NOT NULL DEFAULT '0000-00-00',
+  `ord_date` date NOT NULL DEFAULT '1000-01-01',
   `order_type` int(11) NOT NULL DEFAULT '0',
   `ship_via` int(11) NOT NULL DEFAULT '0',
   `delivery_address` tinytext NOT NULL,
@@ -1446,7 +1446,7 @@ CREATE TABLE `0_sales_orders` (
   `deliver_to` tinytext NOT NULL,
   `freight_cost` double NOT NULL DEFAULT '0',
   `from_stk_loc` varchar(5) NOT NULL DEFAULT '',
-  `delivery_date` date NOT NULL DEFAULT '0000-00-00',
+  `delivery_date` date NOT NULL DEFAULT '1000-01-01',
   `payment_terms` int(11) DEFAULT NULL,
   `total` double NOT NULL DEFAULT '0',
   `prep_amount` double NOT NULL DEFAULT '0',
@@ -1673,8 +1673,8 @@ CREATE TABLE `0_stock_master` (
   `depreciation_method` char(1) NOT NULL DEFAULT 'S',
   `depreciation_rate` double NOT NULL DEFAULT '0',
   `depreciation_factor` double NOT NULL DEFAULT '1',
-  `depreciation_start` date NOT NULL DEFAULT '0000-00-00',
-  `depreciation_date` date NOT NULL DEFAULT '0000-00-00',
+  `depreciation_start` date NOT NULL DEFAULT '1000-01-01',
+  `depreciation_date` date NOT NULL DEFAULT '1000-01-01',
   `fa_class_id` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`stock_id`)
 ) ENGINE=InnoDB ;
@@ -1682,12 +1682,12 @@ CREATE TABLE `0_stock_master` (
 -- Data of table `0_stock_master` --
 
 INSERT INTO `0_stock_master` VALUES
-('101', '1', '1', 'iPad Air 2 16GB', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '200', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '0000-00-00', '0000-00-00', ''),
-('102', '1', '1', 'iPhone 6 64GB', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '150', '150', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '0000-00-00', '0000-00-00', ''),
-('103', '1', '1', 'iPhone Cover Case', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '10', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '0000-00-00', '0000-00-00', ''),
-('201', '3', '1', 'AP Surf Set', '', 'each', 'M', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '360', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '0000-00-00', '0000-00-00', ''),
-('202', '4', '1', 'Maintenance', '', 'hr', 'D', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', 'S', '0', '1', '0000-00-00', '0000-00-00', ''),
-('301', '4', '1', 'Support', '', 'hr', 'D', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '0000-00-00', '0000-00-00', '');
+('101', '1', '1', 'iPad Air 2 16GB', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '200', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '1000-01-01', '1000-01-01', ''),
+('102', '1', '1', 'iPhone 6 64GB', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '150', '150', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '1000-01-01', '1000-01-01', ''),
+('103', '1', '1', 'iPhone Cover Case', '', 'each', 'B', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '10', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '1000-01-01', '1000-01-01', ''),
+('201', '3', '1', 'AP Surf Set', '', 'each', 'M', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '360', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '1000-01-01', '1000-01-01', ''),
+('202', '4', '1', 'Maintenance', '', 'hr', 'D', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', 'S', '0', '1', '1000-01-01', '1000-01-01', ''),
+('301', '4', '1', 'Support', '', 'hr', 'D', '4010', '5010', '1510', '5040', '1530', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'S', '0', '1', '1000-01-01', '1000-01-01', '');
 
 -- Structure of table `0_stock_moves` --
 
@@ -1699,7 +1699,7 @@ CREATE TABLE `0_stock_moves` (
   `stock_id` char(20) NOT NULL DEFAULT '',
   `type` smallint(6) NOT NULL DEFAULT '0',
   `loc_code` char(5) NOT NULL DEFAULT '',
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
   `price` double NOT NULL DEFAULT '0',
   `reference` char(40) NOT NULL DEFAULT '',
   `qty` double NOT NULL DEFAULT '1',
@@ -1738,7 +1738,7 @@ CREATE TABLE `0_supp_allocations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `person_id` int(11) DEFAULT NULL,
   `amt` double unsigned DEFAULT NULL,
-  `date_alloc` date NOT NULL DEFAULT '0000-00-00',
+  `date_alloc` date NOT NULL DEFAULT '1000-01-01',
   `trans_no_from` int(11) DEFAULT NULL,
   `trans_type_from` int(11) DEFAULT NULL,
   `trans_no_to` int(11) DEFAULT NULL,
@@ -1790,8 +1790,8 @@ CREATE TABLE `0_supp_trans` (
   `supplier_id` int(11) unsigned NOT NULL,
   `reference` tinytext NOT NULL,
   `supp_reference` varchar(60) NOT NULL DEFAULT '',
-  `tran_date` date NOT NULL DEFAULT '0000-00-00',
-  `due_date` date NOT NULL DEFAULT '0000-00-00',
+  `tran_date` date NOT NULL DEFAULT '1000-01-01',
+  `due_date` date NOT NULL DEFAULT '1000-01-01',
   `ov_amount` double NOT NULL DEFAULT '0',
   `ov_discount` double NOT NULL DEFAULT '0',
   `ov_gst` double NOT NULL DEFAULT '0',
@@ -2133,7 +2133,7 @@ DROP TABLE IF EXISTS `0_voided`;
 CREATE TABLE `0_voided` (
   `type` int(11) NOT NULL DEFAULT '0',
   `id` int(11) NOT NULL DEFAULT '0',
-  `date_` date NOT NULL DEFAULT '0000-00-00',
+  `date_` date NOT NULL DEFAULT '1000-01-01',
   `memo_` tinytext NOT NULL,
   UNIQUE KEY `id` (`type`,`id`)
 ) ENGINE=InnoDB ;
@@ -2199,7 +2199,7 @@ CREATE TABLE `0_wo_manufacture` (
   `reference` varchar(100) DEFAULT NULL,
   `workorder_id` int(11) NOT NULL DEFAULT '0',
   `quantity` double NOT NULL DEFAULT '0',
-  `date_` date NOT NULL DEFAULT '0000-00-00',
+  `date_` date NOT NULL DEFAULT '1000-01-01',
   PRIMARY KEY (`id`),
   KEY `workorder_id` (`workorder_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 ;
@@ -2266,10 +2266,10 @@ CREATE TABLE `0_workorders` (
   `loc_code` varchar(5) NOT NULL DEFAULT '',
   `units_reqd` double NOT NULL DEFAULT '1',
   `stock_id` varchar(20) NOT NULL DEFAULT '',
-  `date_` date NOT NULL DEFAULT '0000-00-00',
+  `date_` date NOT NULL DEFAULT '1000-01-01',
   `type` tinyint(4) NOT NULL DEFAULT '0',
-  `required_by` date NOT NULL DEFAULT '0000-00-00',
-  `released_date` date NOT NULL DEFAULT '0000-00-00',
+  `required_by` date NOT NULL DEFAULT '1000-01-01',
+  `released_date` date NOT NULL DEFAULT '1000-01-01',
   `units_issued` double NOT NULL DEFAULT '0',
   `closed` tinyint(1) NOT NULL DEFAULT '0',
   `released` tinyint(1) NOT NULL DEFAULT '0',
@@ -2283,4 +2283,4 @@ CREATE TABLE `0_workorders` (
 INSERT INTO `0_workorders` VALUES
 ('1', '001/2021', 'DEF', '2', '201', '2021-05-05', '0', '2021-05-05', '2021-05-05', '2', '1', '1', '0'),
 ('2', '002/2021', 'DEF', '5', '201', '2021-05-07', '2', '2021-05-27', '2021-05-07', '0', '0', '1', '0'),
-('3', '003/2021', 'DEF', '5', '201', '2021-05-07', '2', '2021-05-27', '0000-00-00', '0', '0', '0', '0');
+('3', '003/2021', 'DEF', '5', '201', '2021-05-07', '2', '2021-05-27', '1000-01-01', '0', '0', '0', '0');
