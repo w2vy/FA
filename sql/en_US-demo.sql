@@ -122,7 +122,7 @@ CREATE TABLE `0_bank_accounts` (
   `dflt_curr_act` tinyint(1) NOT NULL DEFAULT '0',
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `bank_charge_act` varchar(15) NOT NULL DEFAULT '',
-  `last_reconciled_date` timestamp NOT NULL DEFAULT '1000-01-01 00:00:00',
+  `last_reconciled_date` timestamp NOT NULL DEFAULT '1970-01-01 00:00:01',
   `ending_reconcile_balance` double NOT NULL DEFAULT '0',
   `inactive` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -134,8 +134,8 @@ CREATE TABLE `0_bank_accounts` (
 -- Data of table `0_bank_accounts` --
 
 INSERT INTO `0_bank_accounts` VALUES
-('1060', '0', 'Current account', 'N/A', 'N/A', NULL, 'USD', '1', '1', '5690', '1000-01-01 00:00:00', '0', '0'),
-('1065', '3', 'Petty Cash account', 'N/A', 'N/A', NULL, 'USD', '0', '2', '5690', '1000-01-01 00:00:00', '0', '0');
+('1060', '0', 'Current account', 'N/A', 'N/A', NULL, 'USD', '1', '1', '5690', '1970-01-01 00:00:01', '0', '0'),
+('1065', '3', 'Petty Cash account', 'N/A', 'N/A', NULL, 'USD', '0', '2', '5690', '1970-01-01 00:00:01', '0', '0');
 
 -- Structure of table `0_bank_trans` --
 
