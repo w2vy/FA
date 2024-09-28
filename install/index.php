@@ -134,11 +134,13 @@ function do_install() {
 	global $path_to_root, $db_connections, $def_coy, $installed_extensions, $tb_pref_counter,
 		$dflt_lang, $installed_languages;
 
+	error_log("do_installstart");
 	$coa = $_SESSION['inst_set']['coa'];
 	if (install_connect_db() && db_import($path_to_root.'/sql/'.$coa, $_SESSION['inst_set'])) {
 		$con = $_SESSION['inst_set'];
 		$table_prefix = $con['tbpref'];
 
+		error_log("do_install connected");
 		$def_coy = 0;
 		$tb_pref_counter = 0;
 		$db_connections = array (0=> array (
@@ -152,21 +154,28 @@ function do_install() {
 		 'dbpassword' => $con['dbpassword'],
 		));
 
+		error_log("do_install update perfs");
 		$_SESSION['wa_current_user']->cur_con = 0;
 		
 		update_company_prefs(array('coy_name'=>$con['name']));
+		error_log("do_install update perfs done");
 		$admin = get_user_by_login('admin');
+		error_log("do_install update user perfs");
 		update_user_prefs($admin['id'], array(
 			'language' => $con['lang'], 
 			'password' => md5($con['pass']),
 			'user_id' => $con['admin']));
 
+		error_log("do_install copy config");
 		if (!copy($path_to_root. "/config.default.php", $path_to_root. "/config.php")) {
+			error_log("do_install copy config");
 			display_error(_("Cannot save system configuration file 'config.php'."));
 			return false;
 		}
 
+		error_log("do_install write config db");
 		$err = write_config_db($table_prefix != "");
+		error_log("do_install write config db err = ".$err);
 
 		if ($err == -1) {
 			display_error(_("Cannot open 'config_db.php' configuration file."));
@@ -182,9 +191,12 @@ function do_install() {
 		if (file_exists($path_to_root . "/lang/installed_languages.inc"))
 			include_once($path_to_root . "/lang/installed_languages.inc");
 		$dflt_lang = $_POST['lang'];
+		error_log("do_install write lang");
 		write_lang();
+		error_log("do_install done OK");
 		return true;
 	}
+	error_log("do_install done error");
 	return false;
 }
 
