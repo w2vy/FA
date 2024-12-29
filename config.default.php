@@ -220,7 +220,7 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 		   $db = mysqli_connect(getenv("FA_DB_HOST"), getenv("FA_DB_USER"), getenv("FA_DB_PASSWORD"), "", getenv("FA_DB_PORT"));
 		   mysqli_select_db($db, getenv("FA_DB_NAME"));
 	   } catch (mysqli_sql_exception $e) {
-		   header('Location: /404notFound.php');
+		   header('Location: ' .$path_to_root. '/503.php');
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
    }
