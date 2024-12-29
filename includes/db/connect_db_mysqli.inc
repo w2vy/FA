@@ -63,6 +63,7 @@ function db_query($sql, $err_msg=null)
 
 	db_profile(); // mysql profiling
 
+	error_log('SQL ' . $sql);
 	$retry = MAX_DEADLOCK_RETRY;
 	do {
 		$result = mysqli_query($db, $sql);
