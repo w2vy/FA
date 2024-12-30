@@ -393,8 +393,12 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 		{
 			if (count($set_names)) // standard db restore
 			{
-				if (preg_match('/set\s*names\s*[\']?(\w*)[\']?/i', $set_names[0][0], $match))
+				error_log("set_names " . print_r($set_names[0], true));
+				if (preg_match('/set\s*names\s*[\']?(\w*)[\']?/i', $set_names[0][0], $match)) {
+					error_log("MATCHES!");
 					$encoding = $match[1];
+				}
+				error_log("encoding " .$encoding);
 			}
 			// otherwise use default site ui encoding
 		}
