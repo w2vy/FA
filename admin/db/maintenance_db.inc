@@ -388,6 +388,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 	$new_file = count($set_names);
 	if ($new_db)
 	{
+		error_log("new DB");
 		if ($new_file)
 		{
 			if (count($set_names)) // standard db restore
@@ -400,6 +401,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 	}
 	else
 	{
+		error_log("NOT New DB " .$init);
 		if ($new_file) // import on old db is forbidden: this would destroy db content unless latin1 was used before in UI
 		{
 			$msg = _("This is new format backup file which cannot be restored on database not migrated to utf8.");
