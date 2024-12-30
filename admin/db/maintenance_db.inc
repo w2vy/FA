@@ -415,7 +415,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 
 	db_set_charset($db, $encoding);
 
-//	{ 	// for debugging purposes
+	{ 	// for debugging purposes
 	global $path_to_root;
 	$f = fopen($path_to_root.'/tmp/dbimport.txt', 'w+');
 	fwrite($f, print_r($set_names,true) ."\n");
@@ -424,7 +424,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 	fwrite($f, print_r($data_queries,true));
 	fclose($f);
 	}
-//
+
 	if ($return_errors)
 	{	// prevent errors display
 		$save_debug = $SysPrefs->go_debug;
