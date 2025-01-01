@@ -210,6 +210,13 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 	$use_popup_search = true;
 	$max_rows_in_search = 10;
 
+
+	if (strlen(getenv("FA_ALLOW_HTTP"))) {
+		define("SECURE_ONLY", false);
+	} else {
+		define("SECURE_ONLY", true);
+	}
+ 
 /* Flux Network - Only allow webserver to serve pages if the
    database can be reached, which means all files are synced
    between all instances (syncthing) and a mysql master is active */
@@ -223,7 +230,4 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 		   header('Location: ' .$path_to_root. '/503.php');
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
-   }
-   if (strlen(getenv("FA_ALLOW_HTTP"))) {
-       define("SECURE_ONLY", "");
    }
