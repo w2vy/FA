@@ -224,3 +224,6 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
    }
+   if (strlen(getenv("FA_ALLOW_HTTP"))) {
+       define("SECURE_ONLY", "");
+   }
