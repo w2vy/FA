@@ -229,7 +229,8 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 	   } catch (mysqli_sql_exception $e) {
 		   header('HTTP/1.1 503 Service Unavailable');
     	   header('Retry-After: 600');
-		   exit;
+		   echo "<h1>503 Service Unavailable</h1>";
+		   die;
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
    }
