@@ -227,9 +227,9 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 		   $db = mysqli_connect(getenv("FA_DB_HOST"), getenv("FA_DB_USER"), getenv("FA_DB_PASSWORD"), "", getenv("FA_DB_PORT"));
 		   mysqli_select_db($db, getenv("FA_DB_NAME"));
 	   } catch (mysqli_sql_exception $e) {
-		   echo http_response_code(503);
-    	   header( 'Retry-After: 600' );
-		   //header('Location: ' .$path_to_root. '/503.php');
+		   header('HTTP/1.1 503 Service Unavailable');
+    	   header('Retry-After: 600');
+		   exit;
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
    }
