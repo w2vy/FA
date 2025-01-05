@@ -63,6 +63,11 @@ function db_query($sql, $err_msg=null)
 
 	db_profile(); // mysql profiling
 
+	if (strtolower($sql) == 'et names utf8;') {
+		$sql = "/*!40101 set names utf8 */;";
+	}
+	error_log('SQL ' . $sql);
+
 	$retry = MAX_DEADLOCK_RETRY;
 	do {
 		$result = mysqli_query($db, $sql);

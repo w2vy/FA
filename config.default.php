@@ -224,6 +224,7 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
    if (strlen(getenv("FA_DB_NAME"))) { // We have the right ENV Vars
 	   mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
 	   try {
+			error_log("Try DB Connect");
 		   $db = mysqli_connect(getenv("FA_DB_HOST"), getenv("FA_DB_USER"), getenv("FA_DB_PASSWORD"), "", getenv("FA_DB_PORT"));
 		   mysqli_select_db($db, getenv("FA_DB_NAME"));
 	   } catch (mysqli_sql_exception $e) {
@@ -233,4 +234,5 @@ if (!isset($path_to_root) || isset($_GET['path_to_root']) || isset($_POST['path_
 		   die;
 	   }
 	   mysqli_report(MYSQLI_REPORT_OFF);
+	   error_log("DB Connect OK");
    }
