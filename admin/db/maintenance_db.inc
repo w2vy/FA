@@ -383,29 +383,23 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 	// 'set names' or equivalents should be used only on post 2.3 FA versions
 	// otherwise text encoding can be broken during import
 	//
-	$encoding = 'latin1'; // UI encoding for default site language is the default
+	$encoding = 'utf8'; // UI encoding for default site language is the default
 	$new_db = $init || db_fixed();
 	$new_file = count($set_names);
 	if ($new_db)
 	{
-		error_log("new DB");
 		if ($new_file)
 		{
 			if (count($set_names)) // standard db restore
 			{
-				error_log("set_names " . print_r($set_names[0], true));
-				if (preg_match('/set\s*names\s*[\']?(\w*)[\']?/i', $set_names[0][0], $match)) {
-					error_log("MATCHES!");
+				if (preg_match('/set\s*names\s*[\']?(\w*)[\']?/i', $set_names[0][0], $match))
 					$encoding = $match[1];
-				}
-				error_log("encoding " .$encoding);
 			}
 			// otherwise use default site ui encoding
 		}
 	}
 	else
 	{
-		error_log("NOT New DB " .$init);
 		if ($new_file) // import on old db is forbidden: this would destroy db content unless latin1 was used before in UI
 		{
 			$msg = _("This is new format backup file which cannot be restored on database not migrated to utf8.");
@@ -421,7 +415,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 
 	db_set_charset($db, $encoding);
 
-	{ 	// for debugging purposes
+/*/	{ 	// for debugging purposes
 	global $path_to_root;
 	$f = fopen($path_to_root.'/tmp/dbimport.txt', 'w+');
 	fwrite($f, print_r($set_names,true) ."\n");
@@ -430,7 +424,7 @@ function db_import($filename, $connection, $force=true, $init=true, $protect=fal
 	fwrite($f, print_r($data_queries,true));
 	fclose($f);
 	}
-
+/*/
 	if ($return_errors)
 	{	// prevent errors display
 		$save_debug = $SysPrefs->go_debug;
