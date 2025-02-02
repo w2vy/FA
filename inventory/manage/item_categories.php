@@ -241,9 +241,8 @@ elseif (is_fixed_asset($_POST['mb_flag']))
 }
 elseif (is_crypto_asset($_POST['mb_flag']))
 {
-	gl_all_accounts_list_row(_("Inventory Account:"), 'inventory_account', $_POST['inventory_account']);
-	hidden('inventory_account', $_POST['inventory_account']);
-	hidden('adjustment_account', $_POST['adjustment_account']);
+	hidden('sales_account', '');
+	gl_all_accounts_list_row(_("Asset Account:"), 'inventory_account', $_POST['inventory_account']);
 }
 else
 {
