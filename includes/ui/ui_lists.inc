@@ -831,7 +831,7 @@ function stock_items_list($name, $selected_id=null, $all_option=false,
 	if (isset($opts['fixed_asset']) && $opts['fixed_asset'])
 		$sql .= " AND mb_flag='F'";
 	else
-		$sql .= " AND mb_flag!='F'";
+		$sql .= " AND mb_flag!='F' AND mb_flag!='C'";
 
 	if ($editkey)
 		set_editor('item', $name, $editkey);
@@ -909,7 +909,7 @@ function sales_items_list($name, $selected_id=null, $all_option=false,
 			".TB_PREF."stock_category c
 			ON i.category_id=c.category_id
 			WHERE i.stock_id=s.stock_id
-      AND mb_flag != 'F'";
+      AND mb_flag != 'F' AND mb_flag!='C'";
 
 	
 	if ($type == 'local')	{ // exclude foreign codes

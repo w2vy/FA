@@ -54,6 +54,7 @@ function getTransactions($from, $to)
         AND grn.delivery_date>='$from'
         AND grn.delivery_date<='$to'
         AND item.mb_flag <>'F'
+		AND item.mb_flag <> 'C'
         ORDER BY item.stock_id, grn.delivery_date";
 
     return db_query($sql,"No transactions were returned");

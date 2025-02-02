@@ -56,7 +56,7 @@ function fetch_items($category=0)
 				stock.category_id,units,
 				cat.description
 			FROM ".TB_PREF."stock_master stock LEFT JOIN ".TB_PREF."stock_category cat ON stock.category_id=cat.category_id
-				WHERE mb_flag <> 'D' AND mb_flag <> 'F'";
+				WHERE mb_flag <> 'D' AND mb_flag <> 'F' AND item.mb_flag <> 'C'";
 		if ($category != 0)
 			$sql .= " AND cat.category_id = ".db_escape($category);
 		$sql .= " ORDER BY stock.category_id, stock_id";

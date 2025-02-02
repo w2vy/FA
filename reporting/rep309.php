@@ -51,6 +51,7 @@ function getTransactions($category, $from, $to)
 		AND trans.tran_date<='$to'
 		AND line.quantity<>0
 		AND item.mb_flag <>'F'
+		AND item.mb_flag <> 'C'
 		AND (line.debtor_trans_type = ".ST_SALESINVOICE." OR line.debtor_trans_type = ".ST_CUSTCREDIT.")";
 		if ($category != 0)
 			$sql .= " AND item.category_id = ".db_escape($category);

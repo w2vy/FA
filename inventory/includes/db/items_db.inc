@@ -195,26 +195,29 @@ function get_items_search($description, $type)
 
 	switch ($type) {
 		case "sales":
-			$sql .= " AND !s.no_sale AND mb_flag <> 'F'";
+			$sql .= " AND !s.no_sale AND mb_flag <> 'F' AND mb_flag <> 'C'";
 			break;
 		case "manufactured":
 			$sql .= " AND mb_flag = 'M'";
 			break;
+		case "crypto":
+			$sql .= " AND mb_flag = 'C'";
+			break;
     	case "purchasable":
-    		$sql .= " AND NOT no_purchase AND mb_flag <> 'F' AND i.item_code=i.stock_id";
+    		$sql .= " AND NOT no_purchase AND mb_flag <> 'F' AND mb_flag <> 'C' AND i.item_code=i.stock_id";
     		break;
 		case "costable":
-			$sql .= " AND mb_flag <> 'D' AND mb_flag <> 'F' AND  i.item_code=i.stock_id";
+			$sql .= " AND mb_flag <> 'D' AND mb_flag <> 'F' AND mb_flag <> 'C' AND  i.item_code=i.stock_id";
 			break;
 		case "component":
 			$parent = $_GET['parent'];
-			$sql .= " AND  i.item_code=i.stock_id AND i.stock_id <> '$parent' AND mb_flag <> 'F' ";
+			$sql .= " AND  i.item_code=i.stock_id AND i.stock_id <> '$parent' AND mb_flag <> 'F' AND mb_flag <> 'C'";
 			break;
 		case "kits":
 			$sql .= " AND !i.is_foreign AND i.item_code!=i.stock_id AND mb_flag <> 'F'";
 			break;
 		case "all":
-			$sql .= " AND mb_flag <> 'F' AND i.item_code=i.stock_id";
+			$sql .= " AND mb_flag <> 'F' AND mb_flag <> 'C' AND i.item_code=i.stock_id";
 			break;
 	}
 
