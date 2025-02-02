@@ -32,6 +32,11 @@ function is_fixed_asset($mb_flag)
 	return ($mb_flag == 'F');
 }
 
+function is_crypto_asset($mb_flag)
+{
+	return ($mb_flag == 'C');
+}
+
 function has_stock_holding($mb_flag)
 {
 	return is_purchased($mb_flag) || is_manufactured($mb_flag);
