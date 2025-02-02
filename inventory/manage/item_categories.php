@@ -225,16 +225,16 @@ else
 
 check_row(_("Exclude from purchases:"), 'no_purchase');
 
-gl_all_accounts_list_row(_("Sales Account:"), 'sales_account', $_POST['sales_account']);
-
 if (is_service($_POST['mb_flag']))
 {
+	gl_all_accounts_list_row(_("Sales Account:"), 'sales_account', $_POST['sales_account']);
 	gl_all_accounts_list_row(_("C.O.G.S. Account:"), 'cogs_account', $_POST['cogs_account']);
 	hidden('inventory_account', $_POST['inventory_account']);
 	hidden('adjustment_account', $_POST['adjustment_account']);
 }
 elseif (is_fixed_asset($_POST['mb_flag'])) 
 {
+	gl_all_accounts_list_row(_("Sales Account:"), 'sales_account', $_POST['sales_account']);
 	gl_all_accounts_list_row(_("Asset account:"), 'inventory_account', $_POST['inventory_account']);
 	gl_all_accounts_list_row(_("Depreciation cost account:"), 'cogs_account', $_POST['cogs_account']);
 	gl_all_accounts_list_row(_("Depreciation/Disposal account:"), 'adjustment_account', $_POST['adjustment_account']);
@@ -242,9 +242,12 @@ elseif (is_fixed_asset($_POST['mb_flag']))
 elseif (is_crypto_asset($_POST['mb_flag']))
 {
 	gl_all_accounts_list_row(_("Inventory Account:"), 'inventory_account', $_POST['inventory_account']);
+	hidden('inventory_account', $_POST['inventory_account']);
+	hidden('adjustment_account', $_POST['adjustment_account']);
 }
 else
 {
+	gl_all_accounts_list_row(_("Sales Account:"), 'sales_account', $_POST['sales_account']);
 	gl_all_accounts_list_row(_("Inventory Account:"), 'inventory_account', $_POST['inventory_account']);
 
 	gl_all_accounts_list_row(_("C.O.G.S. Account:"), 'cogs_account', $_POST['cogs_account']);
