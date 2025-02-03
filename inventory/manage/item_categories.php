@@ -255,7 +255,7 @@ else
 
 if (is_manufactured($_POST['mb_flag']))
 	gl_all_accounts_list_row(_("Item Assembly Costs Account:"), 'wip_account', $_POST['wip_account']);
-else
+elseif (!is_crypto_asset($_POST['mb_flag']))
 	hidden('wip_account', $_POST['wip_account']);
 
 $dim = get_company_pref('use_dimension');
