@@ -218,12 +218,18 @@ else
 
 stock_units_list_row(_("Units of Measure:"), 'units', null);
 
-if (is_fixed_asset($_POST['mb_flag'])) 
-	hidden('no_sale', 0);
-else
-	check_row(_("Exclude from sales:"), 'no_sale');
+if (is_crypto_asset($_POST['mb_flag']))
+{
+	hidden('no_sale', 1);
+	hidden('no_purchase', 1);
+} else {
+	if (is_fixed_asset($_POST['mb_flag'])) 
+		hidden('no_sale', 0);
+	else
+		check_row(_("Exclude from sales:"), 'no_sale');
 
-check_row(_("Exclude from purchases:"), 'no_purchase');
+	check_row(_("Exclude from purchases:"), 'no_purchase');
+}
 
 if (is_service($_POST['mb_flag']))
 {
