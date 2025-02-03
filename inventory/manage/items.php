@@ -498,17 +498,17 @@ function item_settings(&$stock_id, $new_item)
 		gl_all_accounts_list_row(_("Depreciation cost account:"), 'cogs_account', $_POST['cogs_account']);
 		gl_all_accounts_list_row(_("Depreciation/Disposal account:"), 'adjustment_account', $_POST['adjustment_account']);
 	}
+	elseif (is_crypto_asset(get_post['mb_flag']))
+	{
+		hidden('sales_account', $_POST['sales_account']);
+		gl_all_accounts_list_row(_("Asset account:"), 'inventory_account', $_POST['inventory_account']);
+	}
 	elseif (!is_service(get_post('mb_flag')))
 	{
 		gl_all_accounts_list_row(_("Sales Account:"), 'sales_account', $_POST['sales_account']);
 		gl_all_accounts_list_row(_("Inventory Account:"), 'inventory_account', $_POST['inventory_account']);
 		gl_all_accounts_list_row(_("C.O.G.S. Account:"), 'cogs_account', $_POST['cogs_account']);
 		gl_all_accounts_list_row(_("Inventory Adjustments Account:"), 'adjustment_account', $_POST['adjustment_account']);
-	}
-	elseif (is_crypto_asset(get_post['mb_flag']))
-	{
-		hidden('sales_account', $_POST['sales_account']);
-		gl_all_accounts_list_row(_("Asset account:"), 'inventory_account', $_POST['inventory_account']);
 	}
 	else 
 	{
