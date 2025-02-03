@@ -505,7 +505,7 @@ function item_settings(&$stock_id, $new_item)
 		gl_all_accounts_list_row(_("C.O.G.S. Account:"), 'cogs_account', $_POST['cogs_account']);
 		gl_all_accounts_list_row(_("Inventory Adjustments Account:"), 'adjustment_account', $_POST['adjustment_account']);
 	}
-	elseif (is_crypto_asset($_POST['mb_flag']))
+	elseif (is_crypto_asset(get_post['mb_flag']))
 	{
 		hidden('sales_account', $_POST['sales_account']);
 		gl_all_accounts_list_row(_("Asset account:"), 'inventory_account', $_POST['inventory_account']);
